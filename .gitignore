@@ -1,7 +1,8 @@
 # compiled output
 /dist
 /node_modules
-
+public/uploads/
+public/vendor/
 # Logs
 logs
 *.log

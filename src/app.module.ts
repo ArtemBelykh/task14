@@ -3,6 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Users } from './entities/users.entity'
+import { Lessons } from './entities/lessons.entity'
+import { Evaluations } from './entities/evaluations.entity'
 
 @Module({
   imports: [
@@ -20,10 +23,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         entities: [__dirname + '/entities/*.entity{.js, .ts}'],
       }),
       inject: [ConfigService],
-    })
+    }),
+    TypeOrmModule.forFeature([Users, Lessons, Evaluations]),
   ],
   controllers: [AppController],
   providers: [AppService],
-  exports: [AppService]
+  exports: [AppService],
 })
 export class AppModule {}

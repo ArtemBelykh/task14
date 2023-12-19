@@ -1,35 +1,43 @@
-import { Body, Controller, Get, Post, Req } from "@nestjs/common";
+import { Controller, Get, Param, Post, Req } from '@nestjs/common'
 import { AppService } from './app.service';
-import { Request } from "express";
+import { Request } from 'express';
+import { Users } from './entities/users.entity'
+import { Lessons } from './entities/lessons.entity'
+import { LessonDto } from './dto/lesson.dto'
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get('/user')
-  getUser(): any {
-    return this.appService.getUser()
+  getUser(): Promise<Users[]> {
+    return this.appService.getUser();
   }
 
-  @Post('/users')
-  createUsers(@Body() req: Request): any {
-    const {data} = req.body
-    return this.appService.createUsers(data)
+  @Post('/user')
+  createUsers(@Req() req: Request): Promise<Users> {
+    return this.appService.createUsers(req.body);
   }
 
   @Get('/lesson/:id')
-  getActivityByEvaluationsUser() {
-    return this.appService.getActivityByEvaluationsUser()
+  getLessonById() {
+    return this.appService.getLessonById();
   }
 
   @Post('/lessons')
-  createLessons() {
-    return this.appService.createLessons()
+  createLessons(@Req() req: Request) {
+    return this.appService.createLessons(req.body);
+  }
+
+  @Get('/lessons')
+  getLessons() {
+    return this.appService.getLessons();
   }
 
   @Post('/lessons/:id/evaluations')
-  createActivityByEvaluationsLesson() {
-    this.appService.createActivityByEvaluationsLesson()
+  async createEvaluation(@Param() params: any, @Req() reques: Request) {
+
+    return await this.appService.createEvaluationForLessonById(params.id, reques.body);
   }
 
 }

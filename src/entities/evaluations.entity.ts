@@ -1,4 +1,13 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn
+} from 'typeorm'
 import { Lessons } from "./lessons.entity";
 import { Users } from "./users.entity";
 
@@ -13,9 +22,9 @@ export class Evaluations {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(() => Lessons, (lessons) => lessons.evaluations, {onDelete: 'CASCADE'})
-  lessons: Lessons
+  @ManyToOne(() => Lessons, (lesson) => lesson.evaluations)
+  lesson: Lessons;
 
-  @OneToMany(() => Users, (users) => users.id)
-  user: Users[]
+  @ManyToOne(() => Users, (user) => user.evaluations)
+  user: Users;
 }

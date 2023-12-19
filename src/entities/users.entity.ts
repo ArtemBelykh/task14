@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { Evaluations } from "./evaluations.entity";
 
 @Entity()
@@ -12,6 +12,6 @@ export class Users {
   @Column()
   email: string;
 
-  @ManyToOne(() => Evaluations, (evaluations) => evaluations.user, {onDelete: 'CASCADE'})
-  evaluations: Evaluations
+  @OneToMany(() => Evaluations, (evaluation) => evaluation.user)
+  evaluations: Evaluations[];
 }
