@@ -12,7 +12,6 @@ export class Users {
   @Column()
   email: string;
 
-  @ManyToOne(() => Evaluations, (evaluations) => evaluations.users, {onDelete: 'CASCADE'})
-  @JoinColumn({name: 'user'})
+  @ManyToOne(() => Evaluations, (evaluations) => evaluations.user, {onDelete: 'CASCADE'})
   evaluations: Evaluations
 }

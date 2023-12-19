@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Lessons } from "./lessons.entity";
 import { Users } from "./users.entity";
 
@@ -10,13 +10,12 @@ export class Evaluations {
   @Column()
   score: number;
 
-  @Column()
+  @CreateDateColumn()
   createdAt: Date;
 
   @ManyToOne(() => Lessons, (lessons) => lessons.evaluations, {onDelete: 'CASCADE'})
-  @JoinColumn({name: 'evaluations'})
   lessons: Lessons
 
   @OneToMany(() => Users, (users) => users.id)
-  users: Users[]
+  user: Users[]
 }

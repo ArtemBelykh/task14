@@ -20,10 +20,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         entities: [__dirname + '/entities/*.entity{.js, .ts}'],
       }),
       inject: [ConfigService],
-    }),
-    AppModule
+    })
   ],
   controllers: [AppController],
   providers: [AppService],
+  exports: [AppService]
 })
 export class AppModule {}

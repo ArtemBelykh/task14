@@ -1,5 +1,6 @@
-import { Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post, Req } from "@nestjs/common";
 import { AppService } from './app.service';
+import { Request } from "express";
 
 @Controller()
 export class AppController {
@@ -11,8 +12,9 @@ export class AppController {
   }
 
   @Post('/users')
-  createActivity(): any {
-    return this.appService.createActivity()
+  createUsers(@Body() req: Request): any {
+    const {data} = req.body
+    return this.appService.createUsers(data)
   }
 
   @Get('/lesson/:id')
@@ -21,8 +23,8 @@ export class AppController {
   }
 
   @Post('/lessons')
-  getLessons() {
-    return this.appService.getLessons()
+  createLessons() {
+    return this.appService.createLessons()
   }
 
   @Post('/lessons/:id/evaluations')

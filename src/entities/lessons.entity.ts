@@ -12,6 +12,6 @@ export class Lessons {
   @Column()
   code: string;
 
-  @OneToMany(() => Evaluations, (evaluations) => evaluations.id)
+  @OneToMany(() => Evaluations, (evaluations) => evaluations.lessons)
   evaluations: Evaluations[]
 }
