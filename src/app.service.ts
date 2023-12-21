@@ -16,8 +16,7 @@ export class AppService {
     private readonly lessonsRepository: Repository<Lessons>,
     @InjectRepository(Evaluations)
     private readonly evaluationsRepository: Repository<Evaluations>
-  ) {
-  }
+  ) {}
 
   getUser(): Promise<Users[]> {
     return this.userRepository.find()
@@ -34,7 +33,7 @@ export class AppService {
     const createLessons = this.lessonsRepository.create({ ...data })
     const leessons = this.lessonsRepository.save(createLessons)
 
-    return leessons;
+    return leessons
   }
 
   async getLessons() {
@@ -63,25 +62,24 @@ export class AppService {
   ): Promise<Evaluations> {
     const { user_id, score } = evaluationData;
 
-    const lesson = await this.lessonsRepository.findOne({ where: { id: lessonId } });
-
+    const lesson = await this.lessonsRepository.findOne({
+      where: { id: lessonId }
+    })
 
     if (!lesson) {
-      throw new NotFoundException('Lesson not found');
+      throw new NotFoundException('Lesson not found')
     }
 
-    let user = await this.userRepository.findOne({ where: { id: user_id } });
+    const user = await this.userRepository.findOne({ where: { id: user_id } })
 
     if (!user) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException('User not found')
     }
 
-    const evaluation = new Evaluations();
-    evaluation.score = parseInt(score);
-    evaluation.lesson = lesson;
-    evaluation.user = user;
-
-
-    return this.evaluationsRepository.save(evaluation);
+    const evaluation = new Evaluations()
+    evaluation.score = parseInt(score)
+    evaluation.lesson = lesson
+    evaluation.user = user
+    return this.evaluationsRepository.save(evaluation)
   }
 }
