@@ -2,11 +2,10 @@ import { Controller, Get, Param, Post, Req } from '@nestjs/common'
 import { AppService } from './app.service';
 import { Request } from 'express';
 import { Users } from './entities/users.entity'
-import { Lessons } from "./entities/lessons.entity";
-import { LessonDto } from "./dto/lesson.dto";
-import { Evaluations } from "./entities/evaluations.entity";
+import { Lessons } from './entities/lessons.entity'
+import { Evaluations } from './entities/evaluations.entity'
 
-@Controller()
+@Controller('/api')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
