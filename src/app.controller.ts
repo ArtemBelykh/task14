@@ -2,8 +2,9 @@ import { Controller, Get, Param, Post, Req } from '@nestjs/common'
 import { AppService } from './app.service';
 import { Request } from 'express';
 import { Users } from './entities/users.entity'
-import { Lessons } from './entities/lessons.entity'
-import { LessonDto } from './dto/lesson.dto'
+import { Lessons } from "./entities/lessons.entity";
+import { LessonDto } from "./dto/lesson.dto";
+import { Evaluations } from "./entities/evaluations.entity";
 
 @Controller()
 export class AppController {
@@ -14,18 +15,13 @@ export class AppController {
     return this.appService.getUser();
   }
 
-  @Post('/user')
+  @Post('/users')
   createUsers(@Req() req: Request): Promise<Users> {
     return this.appService.createUsers(req.body);
   }
 
-  @Get('/lesson/:id')
-  getLessonById() {
-    return this.appService.getLessonById();
-  }
-
   @Post('/lessons')
-  createLessons(@Req() req: Request) {
+  createLessons(@Req() req: Request): Promise<Lessons> {
     return this.appService.createLessons(req.body);
   }
 
@@ -35,9 +31,9 @@ export class AppController {
   }
 
   @Post('/lessons/:id/evaluations')
-  async createEvaluation(@Param() params: any, @Req() reques: Request) {
+  async createEvaluation(@Param() params: any, @Req() req: Request): Promise<Evaluations> {
 
-    return await this.appService.createEvaluationForLessonById(params.id, reques.body);
+    return await this.appService.createEvaluationForLessonById(params.id, req.body);
   }
 
 }

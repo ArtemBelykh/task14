@@ -19,7 +19,7 @@ export class AppService {
   ) {
   }
 
-  getUser() {
+  getUser(): Promise<Users[]> {
     return this.userRepository.find()
   }
 
@@ -37,8 +37,6 @@ export class AppService {
     return leessons;
   }
 
-  getLessonById() {
-  }
   async getLessons() {
     const lessons = await this.lessonsRepository.find({
       relations: ['evaluations', 'evaluations.user']
