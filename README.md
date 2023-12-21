@@ -18,7 +18,12 @@ API доступно по следующему URL:
 
 1. Установить зависимости: `npm install`
 2. Запустить сервер: `npm start` или версию разработки `npm run start:dev`
-
+3. Указать в .env переменные:
+* `DB_HOST=localhost`
+* `DB_PORT=5432`
+* `DB_USERNAME=youname`
+* `DB_PASSWORD=youpass`
+* `DB_NAME=youdb`
 ## Описание методов
 
 API предоставляет следующие методы:
